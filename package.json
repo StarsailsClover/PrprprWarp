@@ -1,0 +1,46 @@
+{
+  "name": "prprprwarp",
+  "version": "26.0.0-alpha.1",
+  "private": true,
+  "description": "Capture a live web page into a structured, interactive offline mirror.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StarsailsClover/PrprprWarp.git"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "npm run typecheck && npm run test && npm run build && npm run check:leaks",
+    "check:leaks": "node scripts/check-watermark-leaks.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "fixture:build": "node tests/fixtures/site/build.mjs",
+    "fixture:serve": "node tests/fixtures/site/server.mjs",
+    "package": "npm run build && npm run check:leaks && node scripts/package.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "watermark": "node scripts/watermark/apply-watermarks.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "idb": "^8.0.3",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.468.0",
+    "postcss-value-parser": "^4.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.7",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.3",
+    "@types/react-dom": "^19.0.2",
+    "@vitest/coverage-v8": "^5.0.5",
+    "esbuild": "^0.28.2",
+    "jsdom": "^30.1.3",
+    "typescript": "^5.7.2",
+    "vitest": "^5.0.5"
+  }
+}

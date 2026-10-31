@@ -1,0 +1,38 @@
+# GitHub  @Sta rsai   ls   Cl  o ver
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+      - "v26.*"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run package
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prprprwarp-v26.0-alpha.1
+          path: release/
+# GitH   u   b@S   tars   ailsClover
+          if-no-files-found: error
